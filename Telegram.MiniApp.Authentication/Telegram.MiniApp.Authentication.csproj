@@ -4,6 +4,15 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>Telegram MiniApp Authentication</Title>
+    <PackageId>Telegram.MiniApp.Authentication</PackageId>
+    <Version>0.1.0</Version>
+    <Authors>DmytroSemenko</Authors>
+    <Description>Authentication for telegram mini apps.</Description>
+    <PackageProjectUrl></PackageProjectUrl>
+    <RepositoryUrl>https://github.com/DmytroSemenko/Telegram.MiniApp.Authentication</RepositoryUrl>
+    <PackageTags>telegram;authentication</PackageTags>
   </PropertyGroup>
 
 	<ItemGroup>
