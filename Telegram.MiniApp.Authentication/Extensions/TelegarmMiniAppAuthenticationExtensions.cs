@@ -4,7 +4,7 @@ namespace Telegram.MiniApp.Authentication.Extensions;
 
 public static class TelegarmMiniAppAuthenticationExtensions
 {
-    public static AuthenticationBuilder AddTelegarmMiniAppAuthentication(this AuthenticationBuilder authenticationBuilder, string botToken, TimeSpan? expirationDuration)
+    public static AuthenticationBuilder AddTelegarmMiniAppAuthentication(this AuthenticationBuilder authenticationBuilder, string botToken, TimeSpan? expirationDuration = null)
     {
         authenticationBuilder
             .AddScheme
