@@ -1,5 +1,9 @@
 # Telegram.MiniApp.Authentication
 
+## Download
+
+[Nuget](https://www.nuget.org/packages/Telegram.MiniApp.Authentication/)
+
 ## How to use
 
 1. From your frontend app add raw init data to header Authentication with every request. [Telegram documentation](https://core.telegram.org/bots/webapps#validating-data-received-via-the-mini-app)
