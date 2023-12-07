@@ -7,16 +7,17 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>Telegram MiniApp Authentication</Title>
     <PackageId>Telegram.MiniApp.Authentication</PackageId>
-    <Version>0.1.1</Version>
+    <Version>0.1.2</Version>
     <Authors>DmytroSemenko</Authors>
     <Description>Authentication for telegram mini apps.</Description>
     <PackageProjectUrl></PackageProjectUrl>
     <RepositoryUrl>https://github.com/DmytroSemenko/Telegram.MiniApp.Authentication</RepositoryUrl>
     <PackageTags>telegram;authentication</PackageTags>
+	  <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
 	<ItemGroup>
+		<None Include="..\README.md" Pack="true" PackagePath="\"/>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 	</ItemGroup>
-	
 </Project>
