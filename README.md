@@ -13,6 +13,16 @@ Add to your ASP.NET Core application this line:
 ```
 builder.Services.AddAuthentication().AddTelegarmMiniAppAuthentication("<BotToken>");
 ```
+And don't forgot to add also:
+
+```
+builder.Services.AddAuthorization();
+
+var app = builder.Build();
+
+app.UseAuthentication();
+app.UseAuthorization();
+```
 
 Replace <BotToken> placeholder with your actual bot token that you can get from [BotFather](https://t.me/BotFather).
 
