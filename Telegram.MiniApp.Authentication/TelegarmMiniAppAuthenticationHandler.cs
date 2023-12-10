@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Encodings.Web;
+using System.Text.Json;
 
 namespace Telegram.MiniApp.Authentication;
 
@@ -67,28 +68,36 @@ public class TelegarmMiniAppAuthenticationHandler(
             return AuthenticateResult.Fail("Init data expired");
         }
 
-        pairs.Sort();
-
         if (_secretKey == null)
         {
             var data = Encoding.UTF8.GetBytes(Options.BotToken);
             var key = Encoding.UTF8.GetBytes(TelegarmMiniAppAuthenticationConstants.SecretKeySalt);
-            _secretKey ??= HMACSHA256.HashData(key, data);
+            _secretKey = HMACSHA256.HashData(key, data);
         }
 
+        pairs.Sort();
         var computedHash = BitConverter.ToString(HMACSHA256.HashData(_secretKey, Encoding.UTF8.GetBytes(string.Join("\n", pairs)))).Replace("-", "").ToLower();
 
-        var identity = new ClaimsIdentity(Enumerable.Empty<Claim>(), Scheme.Name);
-        var principal = new ClaimsPrincipal(identity);
-        var ticket = new AuthenticationTicket(principal, Scheme.Name);
-
-        if (computedHash != hash)
+        if (computedHash == hash)
         {
-            return await Task.FromResult(AuthenticateResult.Fail("Hashes not equal."));
+            searchParams.TryGetValue("user", out var userData);
+
+            var claims = new List<Claim>();
+
+            if (JsonDocument.Parse(userData.ToString()).RootElement.TryGetProperty("id", out var userId))
+            {
+                claims.Add(new Claim(TelegarmMiniAppAuthenticationClaimTypes.UserId, userId.ToString()));
+            }
+
+            var identity = new ClaimsIdentity(claims);
+            var principal = new ClaimsPrincipal(identity);
+            var ticket = new AuthenticationTicket(principal, Scheme.Name);
+
+            return await Task.FromResult(AuthenticateResult.Success(ticket));
         }
         else
         {
-            return await Task.FromResult(AuthenticateResult.Success(ticket));
+            return await Task.FromResult(AuthenticateResult.Fail("Hashes not equal."));
         }
     }
 }
