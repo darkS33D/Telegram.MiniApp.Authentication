@@ -7,7 +7,7 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>Telegram MiniApp Authentication</Title>
     <PackageId>Telegram.MiniApp.Authentication</PackageId>
-    <Version>0.1.3</Version>
+    <Version>0.1.4</Version>
     <Authors>DmytroSemenko</Authors>
     <Description>Authentication for telegram mini apps.</Description>
     <PackageProjectUrl></PackageProjectUrl>
